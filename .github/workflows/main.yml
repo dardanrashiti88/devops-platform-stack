@@ -23,7 +23,7 @@ jobs:
 
       # Cache Docker layers
       - name: Cache Docker layers
-        uses: actions/cache@v2
+        uses: actions/cache@v3  # Update to v3 of actions/cache
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-${{ github.sha }}
@@ -65,7 +65,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Deploy to production (you can modify this based on your deployment steps)
+      # Deploy to Docker
       - name: Deploy to Docker
         run: |
           docker-compose -f docker-compose.yml up -d --build
