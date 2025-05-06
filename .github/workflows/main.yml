@@ -29,7 +29,7 @@ jobs:
 
     - name: Build Backend image
       run: |
-        docker buildx build --file ./docker/backend/Dockerfile --tag dardanrashiti88/devops-platform-stack-backend:latest --push .
+        docker buildx build --file ./backend/Dockerfile --tag dardanrashiti88/devops-platform-stack-backend:latest --push .
 
     - name: Build Frontend image
       run: |
@@ -38,3 +38,4 @@ jobs:
     - name: Build Database image
       run: |
         docker buildx build --file ./docker/db/Dockerfile --tag dardanrashiti88/devops-platform-stack-db:latest --push .
+
