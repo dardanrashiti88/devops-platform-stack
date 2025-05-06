@@ -1,0 +1,25 @@
+---
+- name: Setup NGINX on web server
+  hosts: web
+  become: true
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install NGINX
+      apt:
+        name: nginx
+        state: present
+
+    - name: Ensure NGINX is running
+      service:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Copy custom index.html
+      copy:
+        src: ../frontend/index.html
+        dest: /var/www/html/index.html
+        mode: '0644'
