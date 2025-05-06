@@ -2,67 +2,6 @@
 
 This project is a full-stack DevOps platform designed to demonstrate continuous integration, deployment, monitoring, and scaling using Docker, Kubernetes, Helm, and Ansible. It includes backend, frontend, monitoring tools (Prometheus & Grafana), and deployment configurations for various environments.
 
-## Project Structure
-
-devops-platform-stack/
-│
-├── ansible/
-│ ├── inventory.ini # Target hosts for Ansible
-│ └── playbook.yml # Automation playbook (e.g., install Nginx)
-│
-├── backend/
-│ ├── app.py # Backend application
-│ ├── requirements.txt # Backend dependencies
-│ ├── Dockerfile # Backend Docker image
-│ └── .dockerignore
-│
-├── frontend/
-│ ├── index.html # Main frontend page
-│ ├── app.js # Frontend logic
-│ ├── style.css # Stylesheet
-│ ├── package.json # Frontend dependencies
-│ └── Dockerfile # Frontend Docker image
-│
-├── docker/
-│ ├── nginx/
-│ │ └── Dockerfile # Nginx Docker image
-│ └── db/
-│ └── Dockerfile # MySQL Docker image
-│
-├── k8s/
-│ ├── base/
-│ │ ├── deployment.yaml # App deployment config
-│ │ ├── service.yaml # Expose services in K8s
-│ │ └── configmap.yaml # App config
-│ ├── ingress/
-│ │ └── ingress.yaml # Ingress rules (e.g., NGINX ingress)
-│
-├── monitoring/
-│ ├── prometheus/
-│ │ └── prometheus.yml # Prometheus config
-│ └── grafana/
-│ └── dashboards/ # JSON dashboards for Grafana
-│
-├── scripts/
-│ ├── backup.sh # Backup script
-│ ├── restore.sh # Restore script
-│ ├── cleanup.sh # Cleanup script
-│ └── setup.sh # Setup script
-│
-├── helm/
-│ └── myapp/
-│ ├── Chart.yaml # Helm chart metadata
-│ ├── values.yaml # Helm chart values
-│
-├── docs/
-│ ├── architecture.md # High-level overview of the system
-│ └── runbook.md # Troubleshooting and operational guide
-│
-├── .env.sample # Sample environment variables
-├── Makefile # Automation tasks
-├── docker-compose.yml # Local dev & testing configuration
-└── README.md # Project overview and setup instructions
-
 
 ## Prerequisites
 
