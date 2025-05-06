@@ -19,25 +19,22 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
-    - name: Build and push Docker images
-      uses: docker/build-push-action@v2
+    - name: Cache Docker layers
+      uses: actions/cache@v2
       with:
-        context: .
-        file: ./docker/nginx/Dockerfile
-        push: true
-        tags: dardanrashiti88/devops-platform-stack:latest
+        path: /tmp/.buildx-cache
+        key: ${{ runner.os }}-buildx-${{ github.sha }}
+        restore-keys: |
+          ${{ runner.os }}-buildx-
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Docker
-      uses: docker/setup-buildx-action@v1
-
-    - name: Deploy to Docker Compose
+    - name: Build backend image
       run: |
-        docker-compose -f docker-compose.yml up -d --build
+        docker buildx build --file ./docker/backend/Dockerfile --tag dardanrashiti88/devops-platform-stack-backend:latest --push .
+
+    - name: Build database image
+      run: |
+        docker buildx build --file ./docker/db/Dockerfile --tag dardanrashiti88/devops-platform-stack-db:latest --push .
+
+    - name: Build frontend image
+      run: |
+        docker buildx build --file ./docker/frontend/Dockerfile --tag dardanrashiti88/devops-platform-stack-frontend:latest --push .
