@@ -11,24 +11,29 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Updated to v3 of checkout
+      uses: actions/checkout@v3
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
 
     - name: Cache Docker layers
-      uses: actions/cache@v3  # Updated to v3 of cache
+      uses: actions/cache@v3
       with:
         path: /tmp/.buildx-cache
         key: ${{ runner.os }}-buildx-${{ github.sha }}
         restore-keys: |
           ${{ runner.os }}-buildx-
 
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
     - name: Build frontend Docker image
       uses: docker/build-push-action@v2
       with:
-        context: .  # Root directory
-        file: ./frontend/Dockerfile  # Path to frontend Dockerfile
+        context: . 
+        file: ./frontend/Dockerfile 
         push: true
         tags: dardanrashiti88/devops-platform-stack-frontend:latest
-
